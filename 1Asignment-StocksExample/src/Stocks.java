@@ -1,3 +1,5 @@
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Stocks{
     //fields
 
@@ -23,5 +25,13 @@ public class Stocks{
 
         int[] returnArray = {largestProfit, buyDate, sellDate};
         return returnArray;
+    }
+
+    public int[] createRandomRateArray(int num){
+        int[] rateArray = new int[num];
+        for(int i = 0; i < num; i++){
+            rateArray[i] = ThreadLocalRandom.current().nextInt(-10, 10 + 1);
+        }
+        return rateArray;
     }
 }
