@@ -1,8 +1,11 @@
-package app;
+public class Stocks{
+    //fields
 
-public class App {
-    public static void main(String[] args) throws Exception {
-        int[] rate = {-1,2,-7,-5,-3,-4,-2,-3,-8}; // 1
+    //constructor
+    public Stocks(){}
+
+    //methods
+    public int[] optimizeStocks(int[] rate){
         int largestProfit = 0; // 1
         int buyDate = 0; // 1
         int sellDate = 0; // 1 
@@ -17,6 +20,8 @@ public class App {
                 }
             }
         }
-        System.out.println("Profit: " + largestProfit + ", buy date: " + buyDate + ", sell date: " + sellDate);
+
+        int[] returnArray = {largestProfit, buyDate, sellDate};
+        return returnArray;
     }
 }
