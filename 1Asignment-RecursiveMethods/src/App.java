@@ -4,6 +4,8 @@ public class App {
     public static void main(String[] args) throws Exception {
         Pow p = new Pow();
         Pow2 p2 = new Pow2();
+        double x = 1.1;
+        int n = 2000;
         
         //Using Pow class' method, task 2.1-1
 
@@ -13,13 +15,14 @@ public class App {
         Date end;
 
         do{
-            double r = p.solve(2,4);
+            double r = p.solve(x, n);
             end = new Date();
             rounds++;
         } while(end.getTime()-start.getTime() < 1000);
         time = (double)(end.getTime()-start.getTime())/rounds;
         System.out.println("Milliseconds per round p: " + time);
-        System.out.println(p.solve(2, 4));
+        System.out.println(p.solve(x, n));
+        //O(n)
 
         //Using Pow2 class' method, task 2.2-3
 
@@ -29,7 +32,7 @@ public class App {
         Date end1;
 
         do{
-            double r = p2.solve(2,4);
+            double r = p2.solve(x, n);
             end1 = new Date();
             rounds1++;
         } while(end1.getTime()-start1.getTime() < 1000);
@@ -37,7 +40,8 @@ public class App {
         System.out.println("Milliseconds per round p2: " + time1);
         
         
-        System.out.println(p2.solve(2, 4));
+        System.out.println(p2.solve(x, n));
+        //O(log2(n)+1)
 
         //Comparing to Java's Math.pow method
 
@@ -47,7 +51,7 @@ public class App {
         Date end2;
 
         do{
-            double r = Math.pow(2,4);
+            double r = Math.pow(x, n);
             end2 = new Date();
             rounds2++;
         } while(end2.getTime()-start2.getTime() < 1000);
@@ -55,7 +59,7 @@ public class App {
         System.out.println("Milliseconds per round p2: " + time2);
         
         
-        System.out.println(Math.pow(2, 4));
+        System.out.println(Math.pow(x, n));
 
     }
 }
