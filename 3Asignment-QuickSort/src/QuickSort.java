@@ -4,8 +4,12 @@ import java.util.ArrayList;
 public class QuickSort{
 
     //fields
+    public int partSize;
 
     //constructor
+    public QuickSort(int partSize){
+        this.partSize = partSize;
+    }
 
     //methods
     public ArrayList<Integer> sortQuick(ArrayList<Integer> array){
@@ -19,7 +23,6 @@ public class QuickSort{
             }
             ArrayList<Integer> arrayP1= new ArrayList<Integer>();
             ArrayList<Integer> arrayP2= new ArrayList<Integer>();
-            System.out.println("lim: " + lim);
 
 
             for(int i = 0; i < array.size(); i++){
