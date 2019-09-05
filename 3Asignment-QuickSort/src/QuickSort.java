@@ -4,6 +4,8 @@ public class QuickSort{
 
     //fields
     public int partSize;
+    public int numCall = 0;
+    public int numBCall = 0;
 
     //constructor
     public QuickSort(int partSize){
@@ -11,12 +13,13 @@ public class QuickSort{
     }
 
     //methods
-    public ArrayList<Integer> sortQuick(ArrayList<Integer> array){
-        if(array.size() > 5){
-            int lim = array.get(array.size()-1);
+    public ArrayList<Integer> sortQuick(ArrayList<Integer> array){  
+        numCall++;
+        if(array.size() > partSize){
+            int lim = array.get(array.size()/2);
             int limRow = 1;
             int numLimCopies = 0;
-            while(lim == 1 && limRow < array.size()-1){
+            while(lim == 1 && limRow < array.size()-2){
                 limRow++;
                 lim = array.get(array.size()- limRow);
             }
@@ -58,6 +61,7 @@ public class QuickSort{
     }
 
     public ArrayList<Integer> bubbleSort(ArrayList<Integer> array){
+        numBCall++;
         int n = array.size();
         for(int i = 0; i < n-1; i++){
             for(int u = 0; u < n-i-1; u++){

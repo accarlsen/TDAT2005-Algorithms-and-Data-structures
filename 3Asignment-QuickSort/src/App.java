@@ -6,10 +6,10 @@ public class App {
 
         int checkSum = 0;
         ArrayList<Integer> n = new ArrayList<Integer>();
-        for(int i = 0; i < 10000; i++){
-            int a = (int) (Math.random() * 100 + 1);
-            n.add(a);
-            checkSum += a;
+        for(int i = 0; i < 1000000; i++){
+            int a = (int) (Math.random()*100 + 1);
+            n.add(i);
+            checkSum += i;
         }
         
         QuickSort qs = new QuickSort(50);
@@ -23,16 +23,16 @@ public class App {
             result = qs.sortQuick(n);
             end = new Date();
             rounds++;
-        } while(end.getTime()-start.getTime() < 1);
+        } while(end.getTime()-start.getTime() < 1000);
         time = (double)(end.getTime()-start.getTime())/rounds;
-        System.out.println("Milliseconds per round: " + time);
+        System.out.println("Run-time in milliseconds: " + time);
 
-        
-        //Test A boiisis
+
+        //Test A
         System.out.println("Test A: " + qs.testSortA(result));
 
 
-        //Test B boisisisisiis
+        //Test B
         int newCheckSum = 0;
         boolean testB = false;
         for(int i = 0; i < result.size(); i++){
@@ -44,5 +44,8 @@ public class App {
         }
 
         System.out.println("Test B: " + testB);
+
+        //System.out.println("Calls: " + qs.numCall);
+        //System.out.println("Calls: " + qs.numBCall);
     }
 }
