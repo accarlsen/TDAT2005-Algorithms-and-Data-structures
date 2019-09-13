@@ -1,5 +1,3 @@
-import javax.xml.soap.Node;
-
 public class Josephus{
 
     //fields
