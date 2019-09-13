@@ -11,7 +11,7 @@ public class App {
         double time;
         Date end;
         do{
-            result = j.kill(1000000,4);
+            result = j.kill(40,3);
             end = new Date();
             rounds++;
         } while(end.getTime()-start.getTime() < 1000);

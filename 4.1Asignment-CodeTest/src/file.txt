@@ -1,0 +1,10 @@
+public String readFile(File file) throws IOException {
+        Scanner scanner = new Scanner( file );
+        String text = scanner.useDelimiter("\\A").next();
+        char a = '"';
+        String ab = Character.toString(a);
+        text = text.replaceAll(ab, "\"");
+        scanner.close();
+        return text;
+    }
+    )

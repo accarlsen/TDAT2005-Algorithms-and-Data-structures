@@ -12,7 +12,7 @@ public class Josephus{
         public Node next; 
         public Node( int data ) 
         { 
-            this.data = data; 
+            this.data = data;
         } 
     } 
 
@@ -26,20 +26,20 @@ public class Josephus{
         }
         prev.next = head; //makes the list circular
 
-        Node ptr1 = head, ptr2 = head; 
+        Node p1 = head, p2 = head; 
 
-        while(ptr1.next != ptr1){
+        while(p1.next != p1){
             int count = 1; 
             while(count != m) 
             { 
-                ptr2 = ptr1; 
-                ptr1 = ptr1.next; 
+                p2 = p1;
+                p1 = p1.next; 
                 count++; 
             } 
               
-            ptr2.next = ptr1.next; 
-            ptr1 = ptr2.next; 
+            p2.next = p1.next; 
+            p1 = p2.next; 
         }
-        return ptr1.data;
+        return p1.data;
     }
 }
