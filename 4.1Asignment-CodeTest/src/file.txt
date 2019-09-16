@@ -6,5 +6,5 @@ public String readFile(File file) throws IOException {
         text = text.replaceAll(ab, "\"");
         scanner.close();
         return text;
-    }
-    )
+}
+(

@@ -3,10 +3,6 @@ import java.util.*;
 
 public class CodeChecker{
 
-    //fields
-
-    //constructor
-
     //methods
     public int check(String sRaw){
         String[] s = sRaw.split("");
