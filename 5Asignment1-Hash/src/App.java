@@ -25,7 +25,24 @@ public class App {
         "Marius Tronstad","Henrik Wanderås Trømborg","Steffen Tverfjell","Julie Isabelle Malmedal Utne",
         "Sivert Vanebo","Kristoffer Willa","Lisa Yogalingam","Abilash Younger","Eric Østmo-Sæter","Lars Olsnes Årdal","Simon" };
 
-        HashFunc hf = new HashFunc(100);
+        HashFunc hf = new HashFunc(s.length);
+        System.out.println(hf.tableSize);
         
+        for(int i = 0; i < s.length; i++){
+            hf.addToHashTable(s[i]);
+        }
+
+        System.out.println(hf.collisions);
+        System.out.println(hf.tableSize);
+
+        
+
+        System.out.println(hf.searchHashTable("Lisa Yogalingam"));
+        /*
+        System.out.println(hf.searchHashTable("Steffen Tverfjell"));
+
+        System.out.println(hf.stringToKey("Kim Richard Schau"));
+        System.out.println(hf.stringToKey("Max Torre Seivaag"));
+        System.out.println(hf.stringToKey("Steffen Tverfjell"));*/
     }
 }

@@ -1,6 +1,6 @@
 import java.math.BigInteger;
 import java.nio.charset.Charset;
-import java.util.LinkedList;
+import java.util.*;
 
 import javax.xml.soap.Node;
 
@@ -8,70 +8,72 @@ public class HashFunc {
 
     //fields
     public int tableSize;
-    public Node table = new Node(0);
-    public Node tempN = table;
+    public int collisions = 0;
+    public ArrayList<Node> table = new ArrayList<Node>();
 
     //constructor
     public HashFunc(int tableSize){
-        this.tableSize = this.getNearestPrime(tableSize);
+        this.tableSize = this.getNearestPrime( (int) (tableSize * 1.2));
 
-        for(int i = 0; i < tableSize; i++){
-            Node tempN2 = tempN;
-            tempN.next = new Node(i);
-            tempN = tempN.next;
-            tempN.prev = tempN2;
-
+        for(int i = 1; i < this.tableSize; i++){
+            table.add(new Node());
         }
     }
 
     //methods
     public boolean addToHashTable(String s){
-        int index = this.hashKey(this.stringToKey(s));
+        int index = this.stringToKey(s);
 
-        this.goToNode(index);   //Navigates to correct Node
-        table.object.add(s);    //Adds String to hashed index
-        this.resetNode(index);  //Navigates back to origo
+        if(table.get(index).data == null){
+            table.get(index).data = s;   //Adds String to hashed index
+        }
+        else{
+            Node tempN = table.get(index);
+            while(tempN.next != null){
+                System.out.println("Collision: " + tempN.data + " & " + tempN.next.data);
+                tempN = tempN.next;
+                collisions++;
+            }
 
+            tempN.next = new Node();    //Adds String to hashed index
+            tempN.next.data = s;
+
+            //System.out.println("Collision: " + table.get(index).data + " & " + table.get(index).next.data);
+        }
         return true;
     }
 
-    public BigInteger stringToKey(String s){
+    public int stringToKey(String s){
         BigInteger retVal = new BigInteger("0");
-        byte[] bytes = s.getBytes(Charset.forName("UTF-8"));
+        byte[] bytes = s.getBytes(Charset.forName("UTF-16"));
         int[] uniArray = new int[bytes.length];
-        String tempS = "";
+        int tempI = 0;
         
         for(int i = 0; i < bytes.length; i++){
             uniArray[i] = bytes[i];
-            uniArray[i] = (int) Math.pow( uniArray[i] * 7, i+1);
-            tempS += uniArray[i];
+            //uniArray[i] = (int) Math.pow( uniArray[i] * 7, i+1);
+            tempI += uniArray[i]*i;
         }
-        return retVal = retVal.add(new BigInteger(tempS));
+        return Math.abs(tempI%tableSize);
     }
-    
+    /*
     public int hashKey(BigInteger bi){
-        return (bi.mod(new BigInteger(Integer.toString(tableSize)))).intValue();
-    }
+        return (bi.mod(new BigInteger(Integer.toString(this.tableSize)))).intValue();
+    }*/
 
-    public boolean searchHashTable(String s){
-        boolean found = false;
-        int counter = 0;
-        for(int i = 0; i < tableSize; i++){
-            if(this.searchList(table.object, s)){
-                this.resetNode(counter);
-                return true;
-            }
-            else{
-                table = table.next;
-                counter++;
+    public int searchHashTable(String s){
+        for(int i = 0; i < table.size(); i++){
+            if(table.get(i).data != null && table.get(i).data.equals(s)){
+                return i;
             }
         }
-        return found;
+        return -1;
     }
 
     //Support methods
+    /*
     public static boolean checkPrime(int n) {
-		int m = n/2;
+		int m = (int) Math.sqrt(n);
 		if(n == 0 || n == 1) {
 			return false;
 		} else {
@@ -82,54 +84,27 @@ public class HashFunc {
 			}
 		}
 		return true;
-    }
+    }*/
 
     public int getNearestPrime(int size) {
-		boolean go = true;
-		do {
-			if(checkPrime(size)) {
-				break;
-			} else {
-				size++;
-			}
-		} while (go);
-		return size;
+        boolean prime = true;
+        do{
+            prime = true;
+            for(int i = 2; i <= (int)Math.sqrt(size); i++){
+                if(size%i == 0){
+                    prime = false;
+                    size++;
+                    break;
+                }
+            }
+        }while(!prime);
+        return size;
     }
     
     static class Node 
     { 
-        public int index;
-        public LinkedList<String> object = new LinkedList<String>(); 
+        public String data;
         public Node next;
-        public Node prev;
-        public Node( int index ) { 
-            this.index = index;
-        }
+        public Node() {}
     }
-
-    public boolean goToNode(int target){
-        for(int i = 0; i < target; i++){
-            table = table.next;
-        }
-        return true;
-    }
-
-    public boolean resetNode(int target){
-        for(int i = target; i > 0; i--){
-            table = table.prev;
-        }
-        return true;
-    }
-
-    public boolean searchList(LinkedList<String> ls ,String searchword){
-        boolean retVal = false;
-        for(int i = 0; i < ls.size(); i++){
-            if(searchword.equals(ls.get(i))){
-                retVal = true;
-            }
-        }
-        return retVal;
-    }
-    
-
 }
