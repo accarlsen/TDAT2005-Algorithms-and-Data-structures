@@ -2,8 +2,6 @@ import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.*;
 
-import javax.xml.soap.Node;
-
 public class HashFunc {
 
     //fields
@@ -37,8 +35,6 @@ public class HashFunc {
 
             tempN.next = new Node();    //Adds String to hashed index
             tempN.next.data = s;
-
-            //System.out.println("Collision: " + table.get(index).data + " & " + table.get(index).next.data);
         }
         return true;
     }
@@ -56,10 +52,6 @@ public class HashFunc {
         }
         return Math.abs(tempI%tableSize);
     }
-    /*
-    public int hashKey(BigInteger bi){
-        return (bi.mod(new BigInteger(Integer.toString(this.tableSize)))).intValue();
-    }*/
 
     public int searchHashTable(String s){
         for(int i = 0; i < table.size(); i++){
@@ -69,22 +61,6 @@ public class HashFunc {
         }
         return -1;
     }
-
-    //Support methods
-    /*
-    public static boolean checkPrime(int n) {
-		int m = (int) Math.sqrt(n);
-		if(n == 0 || n == 1) {
-			return false;
-		} else {
-			for(int i = 2; i <= m; i++) {
-				if(n % i == 0) {
-					return false;
-				}
-			}
-		}
-		return true;
-    }*/
 
     public int getNearestPrime(int size) {
         boolean prime = true;
