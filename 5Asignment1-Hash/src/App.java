@@ -32,17 +32,9 @@ public class App {
             hf.addToHashTable(s[i]);
         }
 
-        System.out.println(hf.collisions);
-        System.out.println(hf.tableSize);
-
+        System.out.println("Size of hash-table: " + hf.tableSize);
+        System.out.println("Number of collisions: " + hf.collisions);
+        System.out.println("Average collisions per person: " + (double) hf.collisions/hf.tableSize);
         
-
-        System.out.println(hf.searchHashTable("Lisa Yogalingam"));
-        /*
-        System.out.println(hf.searchHashTable("Steffen Tverfjell"));
-
-        System.out.println(hf.stringToKey("Kim Richard Schau"));
-        System.out.println(hf.stringToKey("Max Torre Seivaag"));
-        System.out.println(hf.stringToKey("Steffen Tverfjell"));*/
     }
 }

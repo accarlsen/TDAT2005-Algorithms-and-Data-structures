@@ -1,4 +1,3 @@
-import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.*;
 
@@ -20,13 +19,15 @@ public class HashFunc {
 
     //methods
     public boolean addToHashTable(String s){
-        int index = this.stringToKey(s);
+        int index = this.stringToHash(s);
 
         if(table.get(index).data == null){
             table.get(index).data = s;   //Adds String to hashed index
         }
         else{
+            collisions++;
             Node tempN = table.get(index);
+            System.out.println("Collision: " + tempN.data);
             while(tempN.next != null){
                 System.out.println("Collision: " + tempN.data + " & " + tempN.next.data);
                 tempN = tempN.next;
@@ -39,15 +40,13 @@ public class HashFunc {
         return true;
     }
 
-    public int stringToKey(String s){
-        BigInteger retVal = new BigInteger("0");
+    public int stringToHash(String s){
         byte[] bytes = s.getBytes(Charset.forName("UTF-16"));
         int[] uniArray = new int[bytes.length];
         int tempI = 0;
         
         for(int i = 0; i < bytes.length; i++){
             uniArray[i] = bytes[i];
-            //uniArray[i] = (int) Math.pow( uniArray[i] * 7, i+1);
             tempI += uniArray[i]*i;
         }
         return Math.abs(tempI%tableSize);
