@@ -1,3 +1,6 @@
+import java.util.Date;
+import java.util.HashMap;
+
 public class App {
     public static void main(String[] args) throws Exception {
         
@@ -24,7 +27,7 @@ public class App {
         "Torstein Holmberget Thorkildsen","Torje Dahll-Larssøn Tolnes","Andreas Torbjørnsen",
         "Marius Tronstad","Henrik Wanderås Trømborg","Steffen Tverfjell","Julie Isabelle Malmedal Utne",
         "Sivert Vanebo","Kristoffer Willa","Lisa Yogalingam","Abilash Younger","Eric Østmo-Sæter","Lars Olsnes Årdal","Simon" };
-
+        
         HashFunc hf = new HashFunc(s.length);
         System.out.println(hf.tableSize);
         
@@ -36,5 +39,52 @@ public class App {
         System.out.println("Number of collisions: " + hf.collisions);
         System.out.println("Average collisions per person: " + (double) hf.collisions/hf.tableSize);
         
+        
+
+        //Task 2
+        int intSize = 5000000;
+        int[] qed = new int[intSize];
+        for(int i = 0; i < qed.length; i++){
+            qed[i] = (int) (Math.random() * 100000000 + 1);
+        }
+        
+        HashFuncInt hfi;
+
+        Date start = new Date();
+		Date end;
+		int rounds = 0;
+		double time;
+		do{
+            hfi = new HashFuncInt(intSize);
+            for(int i = 0; i < qed.length; i++){
+                hfi.addToHashTable(qed[i]);
+            }
+
+            end = new Date();
+            rounds++;
+		} while(end.getTime()-start.getTime() < 1000);
+		time = (double)(end.getTime()-start.getTime())/rounds;
+		System.out.println("Milliseconds per round: " + time);
+		System.out.println("Size of hash-table: " + hfi.tableSize);
+	    System.out.println("Number of collisions: " + hfi.collisions);
+        System.out.println("Average collisions per person: " + (double) hfi.collisions/hfi.tableSize);
+        
+
+        //HashMap
+        Date startDate = new Date();
+	    Date endDate;
+	    double time2;
+	    int rounds2 = 0;
+	    do {
+	    	HashMap map = new HashMap();
+	    	for(int i = 0; i < qed.length; i++) {
+	    		map.put(qed[i], qed[i]);
+	    	}
+	    	endDate = new Date();
+	    	rounds2++;
+	    }while(endDate.getTime()-startDate.getTime() < 1000);
+		time2 = (double)(endDate.getTime()-startDate.getTime())/rounds2;
+		System.out.println("\nMilliseconds per round: " + time2);
+
     }
 }

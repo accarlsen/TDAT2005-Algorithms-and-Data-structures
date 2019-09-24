@@ -47,9 +47,9 @@ public class HashFunc {
         
         for(int i = 0; i < bytes.length; i++){
             uniArray[i] = bytes[i];
-            tempI += uniArray[i]*i;
+            tempI += uniArray[i]*(i+1);
         }
-        return Math.abs(tempI%tableSize);
+        return (tempI%tableSize);
     }
 
     public int searchHashTable(String s){
