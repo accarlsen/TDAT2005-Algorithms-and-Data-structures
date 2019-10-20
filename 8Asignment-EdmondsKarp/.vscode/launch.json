@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Graph",
+            "request": "launch",
+            "mainClass": "Graph",
+            "projectName": "7Asignment-BreadthFirst&TopographicSearch"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - App",
             "request": "launch",
             "mainClass": "App",
