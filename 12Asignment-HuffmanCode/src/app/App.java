@@ -8,5 +8,6 @@ public class App {
         for(int i = 0; i < hf.frequencyList.size(); i++){
             System.out.println(hf.frequencyList.get(i));
         }
+        hf.createTree();
     }
 }
